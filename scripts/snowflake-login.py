@@ -6,7 +6,7 @@ import pandas as pd
 connection_parameters = {
     "account": os.getenv("SNOWFLAKE_ACCOUNT"),
     "user": os.getenv("HARSHITMEHRA"),
-    "password": os.getenv("Harshit@123"),
+    "password": os.getenv(""),
     "role": "your_role",  # Optional
     "warehouse": "your_warehouse",  # Optional
     "database": "your_database",  # Optional
