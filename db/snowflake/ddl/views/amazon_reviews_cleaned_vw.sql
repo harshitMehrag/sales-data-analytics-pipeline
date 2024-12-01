@@ -8,28 +8,31 @@ SELECT
     discount_percentage,
     rating,
     rating_count,
+    about_product,
+    user_id,
+    user_name,
+    review_id,
+    review_title,
+    review_content,
+    img_link,
+    product_link,
+    review_length,
+    keywords,
     sentiment_score,
+    -- Derived field: Is the discount high?
     CASE
-        WHEN discount_percentage > 50 THEN TRUE
-        ELSE FALSE
-    END AS is_highly_discounted,
+        WHEN discount_percentage > 50 THEN 'High'
+        WHEN discount_percentage BETWEEN 20 AND 50 THEN 'Medium'
+        ELSE 'Low'
+    END AS discount_level,
+    -- Derived field: Is the review positive?
     CASE
         WHEN sentiment_score > 0 THEN TRUE
         ELSE FALSE
     END AS is_positive_review,
-    review_title,
-    review_content,
-    review_length
-FROM amazon_reviews
-WHERE
-    rating IS NOT NULL
-    AND rating_count > 0
-    AND sentiment_score IS NOT NULL;
-
-    select * from amazon_reviews_cleaned_vw;
-    SELECT COUNT(*) FROM amazon_reviews;
-SELECT
-    COUNT(*) AS total_records,
-    COUNT(CASE WHEN product_id IS NULL OR TRIM(product_id) = '' THEN 1 END) AS missing_product_ids,
-    COUNT(CASE WHEN rating IS NULL THEN 1 END) AS missing_ratings
-FROM amazon_reviews;
+    -- Derived field: Does the review content indicate long reviews?
+    CASE
+        WHEN review_length > 100 THEN TRUE
+        ELSE FALSE
+    END AS is_long_review
+FROM amazon_reviews_cleaned;
