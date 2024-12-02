@@ -1,0 +1,7 @@
+boto3==1.26.0
+botocore==1.29.0
+requests==2.31.0
+snowflake-connector-python==2.7.10
+numpy==1.24.3
+pandas==1.5.3
+

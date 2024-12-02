@@ -3,7 +3,7 @@ import os
 import boto3
 
 # Initialize the SNS client
-sns_client = boto3.client('sns')
+sns_client = boto3.client('sns', region_name='us-east-1')
 
 # Function to send notifications via SNS
 def send_notification(subject, message):
